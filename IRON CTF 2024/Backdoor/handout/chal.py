@@ -1,4 +1,4 @@
-from curve_operations import Point,Curve   #Custom Module
+from curve_operations import Point,Curve    # Custom module
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Util.number import long_to_bytes
@@ -15,7 +15,7 @@ class Dual_EC:
         self.set_initial_state()
 
     def set_initial_state(self):
-        self.state = ???SECRET🤫??? 
+        self.state = ???SECRET🤫???
 
     def set_next_state(self):
         self.state = self.curve.scalar_multiply(self.P, self.state).x
@@ -30,12 +30,12 @@ def main():
     prng = Dual_EC()
     flag = b'flag{test}'
     print("My PRNG has passed International Standards!!!")
-    print("Here is a Sample Random Number to prove it to you : ",prng.gen_rand_num())
+    print("Here is a Sample Random Number to prove it to you : ", prng.gen_rand_num())
     key = long_to_bytes((prng.gen_rand_num() << 128) + prng.gen_rand_num())
     iv = long_to_bytes(prng.gen_rand_num())
     cipher = AES.new(key, AES.MODE_CBC, iv)
     encrypted_bytes = cipher.encrypt(pad(flag, AES.block_size))
-    print(encrypted_bytes)
+    print('Encrypted bytes : ',encrypted_bytes)
 
 if(__name__ == "__main__"):
     main()
